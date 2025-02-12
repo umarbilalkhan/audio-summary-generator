@@ -15,16 +15,16 @@ def transcribe_audio(audio_file):
 
 # Function to summarize text with bullet points
 def generate_summary(transcript):
-    prompt = (
-        "Summarize the following text into key bullet points:\n\n"
-        f"{transcript}\n\n"
-        "Summary:\n- "
-    )
-    summary = summarizer(prompt, max_length=300, min_length=50, do_sample=False)
+    # Truncate transcript to prevent exceeding model token limits
+    truncated_text = " ".join(transcript.split()[:1024])  
+
+    summary = summarizer(truncated_text, max_length=300, min_length=50, do_sample=False)
     
     # Ensure bullet formatting
-    bullet_summary = summary[0]["summary_text"].replace("\n", "\n- ")
-    return f"- {bullet_summary}"
+    bullet_summary = summary[0]["summary_text"].split(". ")
+    formatted_summary = "\n- " + "\n- ".join(bullet_summary)  # Convert sentences to bullet points
+
+    return formatted_summary
 
 # Function to save summary to a text file
 def save_summary(summary):

@@ -1,4 +1,4 @@
 streamlit
 openai-whisper
 transformers==4.35.2
-torch==2.0.1
+torch==2.2.0

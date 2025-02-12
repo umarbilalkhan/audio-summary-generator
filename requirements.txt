@@ -1,6 +1,4 @@
 streamlit
 openai-whisper
-transformers
-torch
-pydub
-sentencepiece  # Required for some transformer models
+transformers==4.35.2
+torch==2.0.1
